@@ -7,6 +7,8 @@
     <li>
         {{ $quiz->title }} - {{ $quiz->status }}
         <a href="{{ route('quizzes.questions.create', $quiz->id) }}">Add Questions</a>
+        |
+        <a href="{{ route('quizzes.attempt', $quiz->id) }}">Attempt Quiz</a>
     </li>
 @endforeach
 </ul>
