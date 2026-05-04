@@ -645,32 +645,50 @@
 
         <div class="features-grid">
             <div class="feat-card">
-                <div class="feat-icon">⚡</div>
+                <div class="feat-icon">
+                    <!-- Lightning bolt -->
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                </div>
                 <div class="feat-title">Instant evaluation</div>
                 <div class="feat-desc">Scores are calculated the moment a quiz is submitted — no waiting, no manual grading. Every question type has its own smart scoring logic.</div>
             </div>
             <div class="feat-card">
-                <div class="feat-icon">🖼</div>
+                <div class="feat-icon">
+                    <!-- Image icon -->
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                </div>
                 <div class="feat-title">Rich media support</div>
                 <div class="feat-desc">Attach images or YouTube videos to any question. Options can carry text, images, or both — for visual learners and complex assessments.</div>
             </div>
             <div class="feat-card">
-                <div class="feat-icon">🧩</div>
+                <div class="feat-icon">
+                    <!-- Puzzle piece -->
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 13.255V7a2 2 0 0 0-2-2h-6.255A1.994 1.994 0 0 0 11 3a2 2 0 1 0-2 2c0 .35.06.687.17 1H5a2 2 0 0 0-2 2v6.255A1.994 1.994 0 0 0 3 13a2 2 0 1 0 2 2c.35 0 .687-.06 1-.17V19a2 2 0 0 0 2 2h6.255c-.11-.313-.17-.65-.17-1a2 2 0 1 0 2-2c.35 0 .687.06 1 .17V13a2 2 0 0 0 2-2z"/></svg>
+                </div>
                 <div class="feat-title">Extensible by design</div>
                 <div class="feat-desc">Built on the Strategy pattern. Adding a new question type takes one new class — no changes to existing logic, no fragile if-else chains.</div>
             </div>
             <div class="feat-card">
-                <div class="feat-icon">✏️</div>
+                <div class="feat-icon">
+                    <!-- Pencil -->
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2a2.828 2.828 0 0 1 4 4L7 21l-4 1 1-4L18 2z"/></svg>
+                </div>
                 <div class="feat-title">Rich text editor</div>
                 <div class="feat-desc">Write question bodies in HTML or rich text. Format code snippets, bold key terms, and structure complex questions with precision.</div>
             </div>
             <div class="feat-card">
-                <div class="feat-icon">📊</div>
+                <div class="feat-icon">
+                    <!-- Bar chart -->
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+                </div>
                 <div class="feat-title">Detailed results</div>
                 <div class="feat-desc">After submission, students see their score, correct answers, and exactly where they went wrong — question by question.</div>
             </div>
             <div class="feat-card">
-                <div class="feat-icon">🎯</div>
+                <div class="feat-icon">
+                    <!-- Target icon -->
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                </div>
                 <div class="feat-title">Custom marks per question</div>
                 <div class="feat-desc">Assign different mark values to different questions. Weight harder questions more heavily and build a fair total score automatically.</div>
             </div>
@@ -687,7 +705,7 @@
 
                 <div class="types-list">
                     <div class="type-row">
-                        <div class="type-badge">⊙</div>
+                        <div class="type-badge"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg></div>
                         <div class="type-info">
                             <div class="type-name">Binary</div>
                             <div class="type-example">Yes / No · True / False</div>
@@ -697,7 +715,7 @@
                         </div>
                     </div>
                     <div class="type-row">
-                        <div class="type-badge">◎</div>
+                        <div class="type-badge"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="6"/></svg></div>
                         <div class="type-info">
                             <div class="type-name">Single choice</div>
                             <div class="type-example">One correct option from many</div>
@@ -707,7 +725,7 @@
                         </div>
                     </div>
                     <div class="type-row">
-                        <div class="type-badge">☑</div>
+                        <div class="type-badge"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M7 13l3 3 7-7"/></svg></div>
                         <div class="type-info">
                             <div class="type-name">Multiple choice</div>
                             <div class="type-example">Select all correct options</div>
@@ -717,7 +735,7 @@
                         </div>
                     </div>
                     <div class="type-row">
-                        <div class="type-badge">#</div>
+                        <div class="type-badge"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><text x="4" y="17" font-size="14" font-family="monospace">#</text></svg></div>
                         <div class="type-info">
                             <div class="type-name">Number input</div>
                             <div class="type-example">Exact numeric answer</div>
@@ -727,7 +745,7 @@
                         </div>
                     </div>
                     <div class="type-row">
-                        <div class="type-badge">Aa</div>
+                        <div class="type-badge"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><text x="2" y="15" font-size="13" font-family="monospace">Aa</text></svg></div>
                         <div class="type-info">
                             <div class="type-name">Text input</div>
                             <div class="type-example">Open-ended short answer</div>
