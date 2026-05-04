@@ -453,21 +453,21 @@
             </div>
         </div>
         <div class="stat-pill">
-            <div class="stat-icon">✅</div>
+            <div class="stat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2l4-4"/></svg></div>
             <div>
                 <div class="stat-val">{{ $quizzes->where('status','active')->count() }}</div>
                 <div class="stat-lbl">Active</div>
             </div>
         </div>
         <div class="stat-pill">
-            <div class="stat-icon">📝</div>
+            <div class="stat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="4" rx="1"/><rect x="4" y="7" width="16" height="15" rx="2"/><path d="M9 2v4"/><path d="M15 2v4"/></svg></div>
             <div>
                 <div class="stat-val">{{ $quizzes->where('status','draft')->count() }}</div>
                 <div class="stat-lbl">Drafts</div>
             </div>
         </div>
         <div class="stat-pill">
-            <div class="stat-icon">❓</div>
+            <div class="stat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><circle cx="12" cy="16" r="1"/></svg></div>
             <div>
                 <div class="stat-val">{{ $quizzes->sum(fn($q) => $q->questions_count ?? 0) }}</div>
                 <div class="stat-lbl">Total questions</div>
