@@ -2,261 +2,295 @@
 
 @section('content')
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap');
 
-    .quiz-result-wrapper {
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    .qr-root {
+        --bg: #0a0b0e;
+        --surface: #111318;
+        --surface-2: #171b24;
+        --surface-3: #1e2330;
+        --border: rgba(255,255,255,0.07);
+        --border-hover: rgba(255,255,255,0.14);
+        --text: #f0ece4;
+        --text-muted: #6b7280;
+        --text-dim: #9ca3af;
+        --gold: #d4a847;
+        --gold-subtle: rgba(212,168,71,0.10);
+        --gold-border: rgba(212,168,71,0.22);
+        --green: #4ade80;
+        --green-subtle: rgba(74,222,128,0.10);
+        --green-border: rgba(74,222,128,0.22);
+        --red: #f87171;
+        --red-subtle: rgba(248,113,113,0.10);
+        --red-border: rgba(248,113,113,0.22);
+        --mono: 'DM Mono', monospace;
+        --sans: 'DM Sans', sans-serif;
         min-height: 100vh;
-        background: #0d0f14;
-        padding: 3rem 1rem;
-        font-family: 'Sora', sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--sans);
+        padding: 0 0 80px;
     }
 
-    .quiz-result-container {
-        max-width: 780px;
-        margin: 0 auto;
-    }
-
-    /* Header */
-    .result-header {
+    /* ─── Hero ─── */
+    .qr-hero {
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 52px 24px 44px;
         text-align: center;
-        margin-bottom: 3rem;
     }
 
-    .result-badge {
-        display: inline-block;
-        font-family: 'DM Mono', monospace;
+    .qr-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-family: var(--mono);
         font-size: 11px;
-        letter-spacing: 0.15em;
+        letter-spacing: 0.13em;
         text-transform: uppercase;
-        color: #6ee7b7;
-        background: rgba(110, 231, 183, 0.08);
-        border: 1px solid rgba(110, 231, 183, 0.2);
-        padding: 6px 16px;
+        color: var(--green);
+        background: var(--green-subtle);
+        border: 1px solid var(--green-border);
+        padding: 5px 14px;
         border-radius: 100px;
-        margin-bottom: 1.25rem;
+        margin-bottom: 20px;
     }
 
-    .result-title {
-        font-size: clamp(1.6rem, 4vw, 2.4rem);
-        font-weight: 700;
-        color: #f5f4f0;
-        margin: 0 0 0.5rem;
+    .qr-badge-dot {
+        width: 6px;
+        height: 6px;
+        background: var(--green);
+        border-radius: 50%;
+    }
+
+    .qr-title {
+        font-size: clamp(1.5rem, 3.5vw, 2rem);
+        font-weight: 600;
+        letter-spacing: -0.025em;
+        margin-bottom: 8px;
+        color: var(--text);
         line-height: 1.2;
-        letter-spacing: -0.02em;
     }
 
-    .result-subtitle {
-        font-size: 0.95rem;
-        color: #6b7280;
-        margin: 0;
+    .qr-sub {
+        font-size: 0.925rem;
+        color: var(--text-muted);
+        font-weight: 300;
     }
 
-    /* Score Card */
-    .score-card {
-        background: linear-gradient(135deg, #1a1f2e 0%, #151920 100%);
-        border: 1px solid rgba(255,255,255,0.07);
+    /* ─── Body ─── */
+    .qr-body {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 36px 24px 0;
+    }
+
+    /* ─── Score Card ─── */
+    .qr-score-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
         border-radius: 20px;
-        padding: 2.5rem;
-        margin-bottom: 2.5rem;
+        padding: 32px;
         display: flex;
         align-items: center;
-        gap: 2rem;
+        gap: 32px;
+        margin-bottom: 36px;
         flex-wrap: wrap;
         position: relative;
         overflow: hidden;
     }
 
-    .score-card::before {
+    .qr-score-card::after {
         content: '';
         position: absolute;
-        top: -60px;
-        right: -60px;
-        width: 200px;
-        height: 200px;
-        background: radial-gradient(circle, rgba(110,231,183,0.07) 0%, transparent 70%);
+        top: -80px;
+        right: -80px;
+        width: 240px;
+        height: 240px;
+        background: radial-gradient(circle, rgba(212,168,71,0.05) 0%, transparent 65%);
         pointer-events: none;
     }
 
-    .score-ring {
+    /* Ring */
+    .qr-ring {
         position: relative;
-        width: 110px;
-        height: 110px;
+        width: 112px;
+        height: 112px;
         flex-shrink: 0;
     }
 
-    .score-ring svg {
+    .qr-ring-svg {
         transform: rotate(-90deg);
-        width: 110px;
-        height: 110px;
+        width: 112px;
+        height: 112px;
     }
 
-    .score-ring-bg {
+    .qr-ring-track {
         fill: none;
         stroke: rgba(255,255,255,0.06);
-        stroke-width: 8;
+        stroke-width: 7;
     }
 
-    .score-ring-fill {
+    .qr-ring-arc {
         fill: none;
-        stroke: #6ee7b7;
-        stroke-width: 8;
+        stroke: var(--gold);
+        stroke-width: 7;
         stroke-linecap: round;
-        stroke-dasharray: 283;
-        stroke-dashoffset: {{ 283 - (283 * min($attempt->total_score / ($attempt->answers->sum('question.marks') ?: 1), 1)) }};
-        transition: stroke-dashoffset 1s ease;
+        stroke-dasharray: 301;
+        transition: stroke-dashoffset 1.2s cubic-bezier(.4,0,.2,1);
     }
 
-    .score-ring-label {
+    .qr-ring-inner {
         position: absolute;
         inset: 0;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        line-height: 1;
+        gap: 1px;
     }
 
-    .score-number {
-        font-size: 1.6rem;
-        font-weight: 700;
-        color: #f5f4f0;
-    }
-
-    .score-label {
-        font-size: 10px;
-        color: #6b7280;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        margin-top: 2px;
-        font-family: 'DM Mono', monospace;
-    }
-
-    .score-meta {
-        flex: 1;
-    }
-
-    .score-meta h3 {
-        font-size: 1rem;
-        font-weight: 500;
-        color: #9ca3af;
-        margin: 0 0 0.4rem;
-    }
-
-    .score-total {
-        font-size: 2.2rem;
-        font-weight: 700;
-        color: #f5f4f0;
+    .qr-pct {
+        font-size: 1.55rem;
+        font-weight: 600;
+        color: var(--text);
         letter-spacing: -0.03em;
         line-height: 1;
     }
 
-    .score-total span {
-        font-size: 1rem;
-        color: #6b7280;
-        font-weight: 400;
+    .qr-pct-label {
+        font-family: var(--mono);
+        font-size: 10px;
+        color: var(--text-muted);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
     }
 
-    .score-stats {
+    /* Meta */
+    .qr-score-meta { flex: 1; min-width: 180px; }
+
+    .qr-score-heading {
+        font-size: 12px;
+        color: var(--text-muted);
+        font-weight: 400;
+        margin-bottom: 6px;
+        letter-spacing: 0.02em;
+    }
+
+    .qr-score-number {
+        font-size: 2.4rem;
+        font-weight: 600;
+        color: var(--text);
+        letter-spacing: -0.04em;
+        line-height: 1;
+        margin-bottom: 20px;
+    }
+
+    .qr-score-number em {
+        font-size: 1rem;
+        font-style: normal;
+        font-weight: 400;
+        color: var(--text-muted);
+        letter-spacing: 0;
+    }
+
+    .qr-stats {
         display: flex;
-        gap: 1.5rem;
-        margin-top: 1.25rem;
+        gap: 20px;
         flex-wrap: wrap;
     }
 
-    .stat-pill {
+    .qr-stat {
         display: flex;
         align-items: center;
-        gap: 6px;
+        gap: 7px;
         font-size: 13px;
     }
 
-    .stat-dot {
+    .qr-stat-dot {
         width: 7px;
         height: 7px;
         border-radius: 50%;
+        flex-shrink: 0;
     }
 
-    .stat-dot.correct { background: #6ee7b7; }
-    .stat-dot.wrong { background: #f87171; }
+    .qr-stat-label { color: var(--text-muted); }
+    .qr-stat-val { color: var(--text); font-weight: 500; }
 
-    .stat-label { color: #9ca3af; }
-    .stat-value { color: #f5f4f0; font-weight: 500; }
-
-    /* Divider */
-    .section-divider {
+    /* ─── Section Header ─── */
+    .qr-section-head {
         display: flex;
         align-items: center;
-        gap: 1rem;
-        margin-bottom: 1.5rem;
+        gap: 14px;
+        margin-bottom: 16px;
     }
 
-    .section-divider-line {
+    .qr-section-line {
         flex: 1;
         height: 1px;
-        background: rgba(255,255,255,0.07);
+        background: var(--border);
     }
 
-    .section-divider-text {
-        font-family: 'DM Mono', monospace;
+    .qr-section-label {
+        font-family: var(--mono);
         font-size: 11px;
         letter-spacing: 0.12em;
         text-transform: uppercase;
-        color: #4b5563;
+        color: var(--text-muted);
+        flex-shrink: 0;
     }
 
-    /* Question Cards */
-    .question-list {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-    }
+    /* ─── Question Cards ─── */
+    .qr-questions { display: flex; flex-direction: column; gap: 12px; }
 
-    .question-card {
-        background: #131720;
-        border: 1px solid rgba(255,255,255,0.06);
-        border-radius: 16px;
+    .qr-qcard {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-left-width: 3px;
+        border-radius: 14px;
         overflow: hidden;
         transition: border-color 0.2s ease;
     }
 
-    .question-card:hover {
-        border-color: rgba(255,255,255,0.12);
-    }
+    .qr-qcard:hover { border-color: var(--border-hover); border-left-color: inherit; }
+    .qr-qcard.is-correct { border-left-color: var(--green); }
+    .qr-qcard.is-wrong   { border-left-color: var(--red); }
 
-    .question-card.correct-card {
-        border-left: 3px solid #6ee7b7;
-    }
-
-    .question-card.wrong-card {
-        border-left: 3px solid #f87171;
-    }
-
-    .question-card-header {
+    .qr-qcard-top {
         display: flex;
         align-items: flex-start;
         justify-content: space-between;
-        gap: 1rem;
-        padding: 1.25rem 1.5rem 1rem;
+        gap: 14px;
+        padding: 20px 22px 16px;
     }
 
-    .question-index {
-        font-family: 'DM Mono', monospace;
+    .qr-qcard-left {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        flex: 1;
+        min-width: 0;
+    }
+
+    .qr-qnum {
+        font-family: var(--mono);
         font-size: 11px;
-        color: #4b5563;
-        letter-spacing: 0.08em;
+        letter-spacing: 0.06em;
+        color: var(--text-muted);
         flex-shrink: 0;
         padding-top: 2px;
     }
 
-    .question-text {
+    .qr-qtext {
         font-size: 0.95rem;
         font-weight: 500;
-        color: #e5e7eb;
-        line-height: 1.6;
-        flex: 1;
+        color: var(--text);
+        line-height: 1.65;
     }
 
-    .status-badge {
+    .qr-status {
         display: inline-flex;
         align-items: center;
         gap: 5px;
@@ -265,223 +299,236 @@
         font-size: 12px;
         font-weight: 500;
         flex-shrink: 0;
+        white-space: nowrap;
     }
 
-    .status-badge.correct {
-        background: rgba(110, 231, 183, 0.1);
-        color: #6ee7b7;
-        border: 1px solid rgba(110, 231, 183, 0.2);
+    .qr-status svg { width: 12px; height: 12px; flex-shrink: 0; }
+
+    .qr-status.correct {
+        background: var(--green-subtle);
+        color: var(--green);
+        border: 1px solid var(--green-border);
     }
 
-    .status-badge.wrong {
-        background: rgba(248, 113, 113, 0.1);
-        color: #f87171;
-        border: 1px solid rgba(248, 113, 113, 0.2);
+    .qr-status.wrong {
+        background: var(--red-subtle);
+        color: var(--red);
+        border: 1px solid var(--red-border);
     }
 
-    .status-badge svg {
-        width: 12px;
-        height: 12px;
-        flex-shrink: 0;
-    }
-
-    .question-card-body {
-        padding: 0 1.5rem 1.25rem;
-        border-top: 1px solid rgba(255,255,255,0.04);
-        margin-top: 0;
-    }
-
-    .answer-row {
-        display: flex;
+    .qr-qcard-body {
+        padding: 14px 22px 20px;
+        border-top: 1px solid var(--border);
+        display: grid;
+        grid-template-columns: 1fr auto;
         align-items: baseline;
-        gap: 0.75rem;
-        padding-top: 1rem;
+        gap: 8px 16px;
     }
 
-    .answer-row-label {
-        font-family: 'DM Mono', monospace;
-        font-size: 11px;
-        letter-spacing: 0.08em;
+    .qr-answer-block {}
+
+    .qr-answer-key {
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 0.1em;
         text-transform: uppercase;
-        color: #4b5563;
-        flex-shrink: 0;
-        min-width: 90px;
+        color: var(--text-muted);
+        margin-bottom: 4px;
     }
 
-    .answer-row-value {
+    .qr-answer-val {
         font-size: 0.9rem;
-        color: #9ca3af;
+        color: var(--text-dim);
         line-height: 1.5;
     }
 
-    .marks-chip {
-        display: inline-block;
-        font-family: 'DM Mono', monospace;
+    .qr-answer-val.empty { font-style: italic; color: var(--text-muted); }
+
+    .qr-marks-pill {
+        font-family: var(--mono);
         font-size: 12px;
         font-weight: 500;
-        padding: 3px 10px;
-        border-radius: 6px;
+        padding: 4px 12px;
+        border-radius: 7px;
         background: rgba(255,255,255,0.05);
-        color: #d1d5db;
-        border: 1px solid rgba(255,255,255,0.08);
+        border: 1px solid var(--border);
+        color: var(--text-dim);
+        white-space: nowrap;
+        align-self: end;
     }
 
-    /* Footer */
-    .result-footer {
+    /* ─── Footer ─── */
+    .qr-footer {
         text-align: center;
-        margin-top: 3rem;
-        padding-top: 2rem;
-        border-top: 1px solid rgba(255,255,255,0.06);
+        margin-top: 48px;
+        padding-top: 24px;
+        border-top: 1px solid var(--border);
     }
 
-    .result-footer a {
+    .qr-back-btn {
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        padding: 12px 28px;
-        background: rgba(110, 231, 183, 0.1);
-        color: #6ee7b7;
-        border: 1px solid rgba(110, 231, 183, 0.25);
+        padding: 12px 24px;
+        background: transparent;
+        color: var(--text-dim);
+        border: 1px solid var(--border);
         border-radius: 10px;
+        font-family: var(--sans);
         font-size: 14px;
         font-weight: 500;
         text-decoration: none;
-        transition: background 0.2s ease, border-color 0.2s ease;
+        transition: border-color 0.15s, color 0.15s, background 0.15s;
     }
 
-    .result-footer a:hover {
-        background: rgba(110, 231, 183, 0.16);
-        border-color: rgba(110, 231, 183, 0.4);
+    .qr-back-btn:hover {
+        border-color: var(--border-hover);
+        color: var(--text);
+        background: var(--surface);
     }
 
+    /* ─── Responsive ─── */
     @media (max-width: 540px) {
-        .score-card { flex-direction: column; align-items: flex-start; padding: 1.75rem; }
-        .question-card-header { flex-wrap: wrap; }
+        .qr-hero { padding: 40px 16px 36px; }
+        .qr-body { padding: 28px 16px 0; }
+        .qr-score-card { flex-direction: column; align-items: flex-start; padding: 24px; gap: 24px; }
+        .qr-qcard-top { flex-wrap: wrap; }
+        .qr-qcard-body { grid-template-columns: 1fr; }
+        .qr-marks-pill { justify-self: start; }
     }
 </style>
 
-<div class="quiz-result-wrapper">
-    <div class="quiz-result-container">
+<div class="qr-root">
 
-        {{-- Header --}}
-        <div class="result-header">
-            <div class="result-badge">Quiz Complete</div>
-            <h1 class="result-title">{{ $attempt->quiz->title }}</h1>
-            <p class="result-subtitle">Here's a breakdown of your performance</p>
+    {{-- Hero --}}
+    <div class="qr-hero">
+        <div class="qr-badge">
+            <span class="qr-badge-dot"></span>
+            Quiz complete
         </div>
+        <h1 class="qr-title">{{ $attempt->quiz->title }}</h1>
+        <p class="qr-sub">Here's a full breakdown of your performance</p>
+    </div>
 
-        {{-- Score Card --}}
+    <div class="qr-body">
+
+        {{-- Score card --}}
         @php
-            $totalQuestions = $attempt->answers->count();
-            $correctCount   = $attempt->answers->where('is_correct', true)->count();
-            $wrongCount     = $totalQuestions - $correctCount;
-            $maxMarks       = $attempt->answers->sum(fn($a) => optional($a->question)->marks ?? 0);
-            $percentage     = $maxMarks > 0 ? round(($attempt->total_score / $maxMarks) * 100) : 0;
-            $ringOffset     = 283 - (283 * min($attempt->total_score / max($maxMarks, 1), 1));
+            $totalQ    = $attempt->answers->count();
+            $correct   = $attempt->answers->where('is_correct', true)->count();
+            $wrong     = $totalQ - $correct;
+            $maxMarks  = $attempt->answers->sum(fn($a) => optional($a->question)->marks ?? 0);
+            $score     = $attempt->total_score;
+            $pct       = $maxMarks > 0 ? round(($score / $maxMarks) * 100) : 0;
+            $radius    = 48;
+            $circ      = round(2 * M_PI * $radius, 1);
+            $offset    = round($circ - ($circ * min($score / max($maxMarks, 1), 1)), 2);
         @endphp
 
-        <div class="score-card">
-            <div class="score-ring">
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <circle class="score-ring-bg" cx="50" cy="50" r="45"/>
-                    <circle class="score-ring-fill" cx="50" cy="50" r="45"
-                        style="stroke-dashoffset: {{ $ringOffset }}"/>
+        <div class="qr-score-card">
+            <div class="qr-ring">
+                <svg class="qr-ring-svg" viewBox="0 0 112 112" xmlns="http://www.w3.org/2000/svg">
+                    <circle class="qr-ring-track" cx="56" cy="56" r="{{ $radius }}"/>
+                    <circle class="qr-ring-arc"   cx="56" cy="56" r="{{ $radius }}"
+                        style="stroke-dasharray: {{ $circ }}; stroke-dashoffset: {{ $offset }};"/>
                 </svg>
-                <div class="score-ring-label">
-                    <span class="score-number">{{ $percentage }}%</span>
-                    <span class="score-label">Score</span>
+                <div class="qr-ring-inner">
+                    <span class="qr-pct">{{ $pct }}%</span>
+                    <span class="qr-pct-label">Score</span>
                 </div>
             </div>
 
-            <div class="score-meta">
-                <h3>Total marks awarded</h3>
-                <div class="score-total">
-                    {{ $attempt->total_score }}
+            <div class="qr-score-meta">
+                <p class="qr-score-heading">Total marks awarded</p>
+                <div class="qr-score-number">
+                    {{ $score }}
                     @if($maxMarks > 0)
-                        <span>/ {{ $maxMarks }}</span>
+                        <em>/ {{ $maxMarks }}</em>
                     @endif
                 </div>
-
-                <div class="score-stats">
-                    <div class="stat-pill">
-                        <span class="stat-dot correct"></span>
-                        <span class="stat-label">Correct&nbsp;</span>
-                        <span class="stat-value">{{ $correctCount }}</span>
+                <div class="qr-stats">
+                    <div class="qr-stat">
+                        <span class="qr-stat-dot" style="background: var(--green);"></span>
+                        <span class="qr-stat-label">Correct</span>
+                        <span class="qr-stat-val">{{ $correct }}</span>
                     </div>
-                    <div class="stat-pill">
-                        <span class="stat-dot wrong"></span>
-                        <span class="stat-label">Incorrect&nbsp;</span>
-                        <span class="stat-value">{{ $wrongCount }}</span>
+                    <div class="qr-stat">
+                        <span class="qr-stat-dot" style="background: var(--red);"></span>
+                        <span class="qr-stat-label">Incorrect</span>
+                        <span class="qr-stat-val">{{ $wrong }}</span>
                     </div>
-                    <div class="stat-pill">
-                        <span class="stat-label">Questions&nbsp;</span>
-                        <span class="stat-value">{{ $totalQuestions }}</span>
+                    <div class="qr-stat">
+                        <span class="qr-stat-label">Questions</span>
+                        <span class="qr-stat-val">{{ $totalQ }}</span>
                     </div>
                 </div>
             </div>
         </div>
 
-        {{-- Question List --}}
-        <div class="section-divider">
-            <div class="section-divider-line"></div>
-            <span class="section-divider-text">Question Review</span>
-            <div class="section-divider-line"></div>
+        {{-- Question review --}}
+        <div class="qr-section-head">
+            <div class="qr-section-line"></div>
+            <span class="qr-section-label">Question review</span>
+            <div class="qr-section-line"></div>
         </div>
 
-        <div class="question-list">
+        <div class="qr-questions">
             @foreach($attempt->answers as $index => $answer)
                 @php
-                    $given = $answer->given_answer;
+                    $given   = $answer->given_answer;
                     $decoded = json_decode($given, true);
-                    if (is_array($decoded)) {
-                        $given = implode(', ', $decoded);
-                    }
+                    if (is_array($decoded)) { $given = implode(', ', $decoded); }
+                    $isCorrect = $answer->is_correct;
                 @endphp
 
-                <div class="question-card {{ $answer->is_correct ? 'correct-card' : 'wrong-card' }}">
-                    <div class="question-card-header">
-                        <span class="question-index">Q{{ $index + 1 }}</span>
-                        <p class="question-text">{{ $answer->question->text ?? $answer->question->body }}</p>
-                        @if($answer->is_correct)
-                            <span class="status-badge correct">
+                <div class="qr-qcard {{ $isCorrect ? 'is-correct' : 'is-wrong' }}">
+                    <div class="qr-qcard-top">
+                        <div class="qr-qcard-left">
+                            <span class="qr-qnum">Q{{ $index + 1 }}</span>
+                            <p class="qr-qtext">{{ $answer->question->text ?? $answer->question->body }}</p>
+                        </div>
+                        <span class="qr-status {{ $isCorrect ? 'correct' : 'wrong' }}">
+                            @if($isCorrect)
                                 <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M2 6L5 9L10 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M2 6l3 3 5-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                                 Correct
-                            </span>
-                        @else
-                            <span class="status-badge wrong">
+                            @else
                                 <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M3 3L9 9M9 3L3 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                                    <path d="M3 3l6 6M9 3l-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
                                 </svg>
                                 Incorrect
-                            </span>
-                        @endif
+                            @endif
+                        </span>
                     </div>
 
-                    <div class="question-card-body">
-                        <div class="answer-row">
-                            <span class="answer-row-label">Your answer</span>
-                            <span class="answer-row-value">{{ $given ?: '—' }}</span>
+                    <div class="qr-qcard-body">
+                        <div class="qr-answer-block">
+                            <p class="qr-answer-key">Your answer</p>
+                            <p class="qr-answer-val {{ $given ? '' : 'empty' }}">{{ $given ?: 'No answer provided' }}</p>
                         </div>
-                        <div class="answer-row">
-                            <span class="answer-row-label">Marks</span>
-                            <span class="marks-chip">{{ $answer->marks_awarded }}</span>
-                        </div>
+                        <div class="qr-marks-pill">{{ $answer->marks_awarded }} pts</div>
                     </div>
                 </div>
             @endforeach
         </div>
 
         {{-- Footer --}}
-        <div class="result-footer">
-            <a href="{{ url()->previous() }}">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <div class="qr-footer">
+            <a href="{{ route('quizzes.index') }}" class="qr-back-btn">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 11L5 7l4-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
                 Back to Quizzes
             </a>
         </div>
+
+        <script>
+            // Redirect to quizzes page after 5 seconds
+            setTimeout(function() {
+                window.location.href = '{{ route('quizzes.index') }}';
+            }, 5000);
+        </script>
 
     </div>
 </div>

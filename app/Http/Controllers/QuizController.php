@@ -79,7 +79,8 @@ class QuizController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $quiz = \App\Models\Quiz::findOrFail($id);
+        return view('quizzes.edit', compact('quiz'));
     }
 
     /**
@@ -87,7 +88,13 @@ class QuizController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $quiz = \App\Models\Quiz::findOrFail($id);
+        $quiz->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'status' => $request->status,
+        ]);
+        return redirect()->route('quizzes.index')->with('success', 'Quiz updated successfully.');
     }
 
     /**
@@ -95,6 +102,8 @@ class QuizController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $quiz = \App\Models\Quiz::findOrFail($id);
+        $quiz->delete();
+        return redirect()->route('quizzes.index')->with('success', 'Quiz deleted successfully.');
     }
 }
