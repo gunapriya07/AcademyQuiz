@@ -519,8 +519,8 @@
 
                     <div class="card-menu">
                         <div class="menu-trigger" onclick="toggleMenu('menu-{{ $quiz->id }}', event)">···</div>
-                        <div class="dropdown" id="menu-{{ $quiz->id }}">
-                            <a href="{{ route('quizzes.edit', $quiz->id) }}" class="dropdown-item">
+                        <div class="dropdown" id="menu-{{ $quiz->id }}" onclick="event.stopPropagation()">
+                            <a href="{{ route('quizzes.edit', $quiz->id) }}" class="dropdown-item" tabindex="0">
                                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
                                 Edit details
                             </a>
@@ -533,10 +533,9 @@
                                 Attempt quiz
                             </a>
                             <div class="dropdown-sep"></div>
-                            <form action="{{ route('quizzes.destroy', $quiz->id) }}" method="POST"
-                                  onsubmit="return confirm('Delete \'{{ addslashes($quiz->title) }}\'? This cannot be undone.')">
+                            <form action="{{ route('quizzes.destroy', $quiz->id) }}" method="POST" style="margin:0" onsubmit="event.stopPropagation(); return confirm('Delete \'{{ addslashes($quiz->title) }}\'? This cannot be undone.');">
                                 @csrf @method('DELETE')
-                                <button type="submit" class="dropdown-item danger">
+                                <button type="submit" class="dropdown-item danger" tabindex="0">
                                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
                                     Delete quiz
                                 </button>
@@ -650,8 +649,11 @@
         document.getElementById(id).classList.toggle('open');
     }
 
-    document.addEventListener('click', () => {
-        document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('open'));
+    document.addEventListener('click', (e) => {
+        // Only close dropdowns if click is outside any open dropdown
+        if (!e.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('open'));
+        }
     });
 
     // ── Grid / List view toggle
