@@ -1,0 +1,8 @@
+node_modules
+npm-debug.log
+dist
+storage/logs
+storage/framework/cache
+database/database.sqlite
+vendor
+.env
