@@ -1,7 +1,10 @@
 #!/bin/sh
 
-# Start PHP-FPM
-php-fpm &
+php artisan config:clear
+php artisan cache:clear
 
-# Start Nginx
+#  THIS IS THE IMPORTANT LINE
+php artisan migrate --force
+
+php-fpm &
 nginx -g "daemon off;"
