@@ -1,16 +1,17 @@
 #!/bin/sh
 
-# Fix permissions FIRST
-chmod -R 775 storage bootstrap/cache
+# Fix ownership (VERY IMPORTANT)
+chown -R www-data:www-data /var/www
 
-# Clear Laravel cache
+# Fix permissions
+chmod -R 775 /var/www/storage
+chmod -R 775 /var/www/bootstrap/cache
+
+# Clear Laravel caches
 php artisan config:clear
 php artisan cache:clear
-php artisan route:clear
 php artisan view:clear
-
-# Rebuild cache
-php artisan config:cache
+php artisan route:clear
 
 # Run migrations
 php artisan migrate --force
