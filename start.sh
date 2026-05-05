@@ -1,13 +1,13 @@
 #!/bin/sh
 
-sed -i "s/LISTEN_PORT/${PORT}/g" /etc/nginx/conf.d/default.conf
+# Fix ownership (VERY IMPORTANT)
+chown -R www-data:www-data /var/www
 
 # Fix permissions
-chown -R www-data:www-data /var/www
 chmod -R 775 /var/www/storage
 chmod -R 775 /var/www/bootstrap/cache
 
-# Clear cache
+# Clear Laravel caches
 php artisan config:clear
 php artisan cache:clear
 php artisan view:clear
