@@ -33,3 +33,8 @@ Route::post('quizzes/{quiz}/questions', [QuizController::class, 'storeQuestion']
 
 // Quiz attempt result page
 Route::get('attempts/{attempt}', [AttemptController::class, 'result'])->name('quizzes.result');
+
+// Simple route to test cookies
+Route::get('/cookie-test', function () {
+    return response('Cookie test')->cookie('test_cookie', 'test_value', 10);
+});
